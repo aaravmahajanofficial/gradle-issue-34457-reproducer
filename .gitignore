@@ -1,13 +1,107 @@
-# Gradle
 .gradle
 build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# IDEA
+### IntelliJ IDEA ###
 .idea/
+*.iws
+*.iml
+*.ipr
+out/
+.idea_modules/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
-# Eclipse
-*.classpath
-*.project
-*.settings
+### Kotlin ###
+.kotlin
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 bin/
-.metadata/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### Mac OS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+### Windows ###
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+### Linux ###
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+### Vim ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+
+### Gradle Profiler ###
+profile-out/
+gradle-user-home/
+
+### Jenkins ###
+.jenkins/
+
+### Test outputs ###
+**/test/resources/output
+
+### Secrets and local configuration ###
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.local.properties
+local.properties
+credentials.properties
+secrets.properties
+
+### Generated files ###
+generated/
+
+### Logs ###
+*.log
+*.log.*
+hs_err_pid*
+replay_pid*
+
+### Temporary files ###
+tmp/
+temp/
+.temp/
