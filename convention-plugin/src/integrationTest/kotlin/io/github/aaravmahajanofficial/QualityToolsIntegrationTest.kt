@@ -22,7 +22,6 @@ import org.gradle.testkit.runner.TaskOutcome
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import kotlin.io.path.readText
 
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 @DisplayName("Quality Tools Integration Tests")
@@ -39,20 +38,7 @@ class QualityToolsIntegrationTest {
                 .withSettingsGradle()
                 .withGradleProperties(
                     mapOf(
-                        "org.gradle.jvmargs" to
-                            "--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED" +
-                            "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED" +
-                            "--add-opens=java.base/java.lang=ALL-UNNAMED" +
-                            "--add-opens=java.base/java.io=ALL-UNNAMED" +
-                            "--add-opens=java.base/java.util=ALL-UNNAMED" +
-                            "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED" +
-                            "--add-opens=java.base/java.security=ALL-UNNAMED" +
-                            "--add-opens=java.base/java.net=ALL-UNNAMED" +
-                            "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED" +
-                            "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED" +
-                            "--add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED",
-
-                        "org.gradle.daemon" to "false"
+                        "org.gradle.jvmargs" to "--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED",
                     ),
                 ).withBuildGradle(
                     """
@@ -83,15 +69,13 @@ class QualityToolsIntegrationTest {
                 .withTestSource()
 
         val result = builder.runGradle("test", "jacocoTestReport", "jacocoTestCoverageVerification")
-        result.task("test")?.outcome shouldBe TaskOutcome.SUCCESS
-        result.task("jacocoTestReport")?.outcome shouldBe TaskOutcome.SUCCESS
-        result.task("jacocoTestCoverageVerification")?.outcome shouldBe TaskOutcome.SUCCESS
+        result.task(":test")?.outcome shouldBe TaskOutcome.SUCCESS
+        result.task(":jacocoTestReport")?.outcome shouldBe TaskOutcome.SUCCESS
+        result.task(":jacocoTestCoverageVerification")?.outcome shouldBe TaskOutcome.SUCCESS
 
         val xmlReport = builder.projectDir.resolve("build/reports/jacoco/test/jacocoTestReport.xml")
         val htmlReport = builder.projectDir.resolve("build/reports/jacoco/test/html/index.html")
         val csvReport = builder.projectDir.resolve("build/reports/jacoco/test/jacocoTestReport.csv")
-
-        println(xmlReport.readText())
 
         xmlReport.shouldExist()
         htmlReport.shouldExist()

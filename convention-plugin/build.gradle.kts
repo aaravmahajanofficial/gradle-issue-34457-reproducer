@@ -56,6 +56,11 @@ testing {
                     }
 
                     maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+
+                    // JVM args needed for withDebug(true) in GradleRunner
+                    jvmArgs(
+                        "--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED"
+                    )
                 }
             }
         }
